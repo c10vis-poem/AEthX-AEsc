@@ -1,6 +1,6 @@
 # agent.md — novus-aesc (Æsc)
 
-Procedural directives for an agent working in this repo. See `CLAUDE.md`/`README.md` for
+Procedural directives for an agent working in this repo. See `AGENTS.md`/`README.md` for
 architecture, `STACK-MAP.md` for position in the federation.
 
 ## Before writing daemon code
