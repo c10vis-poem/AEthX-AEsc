@@ -46,6 +46,17 @@ class CloudLlmRuntime(
         val customEndpoint = appState.get(KEY_CLOUD_ENDPOINT)?.takeIf { it.isNotBlank() }
         val customModel = appState.get(KEY_CLOUD_MODEL)?.takeIf { it.isNotBlank() }
 
+        // Local OpenAI-compatible server: llama-server (CUDA, Jetson) or npu-serve (Hexagon, phone). No key.
+        val local = appState.get(KEY_LOCAL_ENDPOINT)?.takeIf { it.isNotBlank() }
+        if (local != null) {
+            return CloudConfig(
+                endpoint = local,
+                apiKey = "",
+                model = appState.get(KEY_LOCAL_MODEL)?.takeIf { it.isNotBlank() } ?: "local",
+                label = "Local",
+            )
+        }
+
         val openRouter = appState.get(SecretStore.KEY_API_OPENROUTER)
         if (!openRouter.isNullOrBlank()) {
             return CloudConfig(
@@ -81,7 +92,7 @@ class CloudLlmRuntime(
     fun refreshStatus() {
         val cfg = resolveConfig()
         _backendStatus.value = if (cfg != null) {
-            "Adreno 830 · Cloud fallback (${cfg.label})"
+            "LLM · ${cfg.label}"
         } else {
             "Cloud API · not configured"
         }
@@ -130,7 +141,7 @@ class CloudLlmRuntime(
             conn.doOutput = true
             conn.setRequestProperty("Content-Type", "application/json")
             conn.setRequestProperty("Accept", "text/event-stream")
-            conn.setRequestProperty("Authorization", "Bearer ${cfg.apiKey}")
+            if (cfg.apiKey.isNotBlank()) conn.setRequestProperty("Authorization", "Bearer ${cfg.apiKey}")
             conn.connectTimeout = 10_000
             conn.readTimeout = 120_000
 
@@ -172,5 +183,7 @@ class CloudLlmRuntime(
         private const val TAG = "CloudLlm"
         const val KEY_CLOUD_MODEL = "cloud.model"
         const val KEY_CLOUD_ENDPOINT = "cloud.endpoint"
+        const val KEY_LOCAL_ENDPOINT = "local.endpoint"
+        const val KEY_LOCAL_MODEL = "local.model"
     }
 }

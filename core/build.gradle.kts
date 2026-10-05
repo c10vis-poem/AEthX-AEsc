@@ -2,6 +2,7 @@
 // Plain JVM Kotlin so the same code runs in the Android app and natively on Linux (Jetson).
 plugins {
     kotlin("jvm") version "2.1.0"
+    application
 }
 
 repositories { mavenCentral() }
@@ -12,3 +13,8 @@ dependencies {
 }
 
 kotlin { jvmToolchain(17) }
+
+application {
+    mainClass.set("aesc.core.cli.MainKt")
+    applicationName = "aesc"
+}
