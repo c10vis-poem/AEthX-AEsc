@@ -1,5 +1,10 @@
 # RESUME.md — novus-aesc (Æsc)
 
+## Next session (from 2026-10-08, session 34c3e229)
+- Branch `pending-fold`: `unresolved.md` folded into PENDING.md; ships at wrap-up.
+- 7 old local branches whose PRs merged get deleted (workstream 4).
+Full plan, run as parallel subagent workstreams: vault `NovAExorpus/RESUME.md` START HERE.
+
 **Status:** Scaffold. Nothing runs yet. Build order item #2 (see `docs/BUILD-ORDER.md`), blocked on #1 (DroidDesk install) per operator sequencing — do not re-sequence.
 
 ## Current state
