@@ -5,6 +5,8 @@ Durable cross-session backlog. Not rewritten each session — items persist unti
 - **Blocked on DroidDesk install** (build order #1 in `docs/BUILD-ORDER.md`) — this repo is build order #2, do not re-sequence.
 - **Watchdog daemon doesn't survive Android process management** (MIUI/One UI/Android 13+ kill it). Fix is a `ForegroundService`, not yet built.
 - **5 salvage targets not yet pulled from `horizons-ui`** — NPU loader, ADB loopback, Chromium integration, terminal render, model router. All unchecked in `salvage/README.md`.
+- **NPU follow-ups (2026-10-23, `docs/npu-proof/2026-10-23.md`):** 4B cpu run never finished (cause unchecked); cpu baseline needs a rerun on charge; HTP0+HTP1 split not tested; install plan §6 continues from step 8.
+- **AGENTS.md §Memory is stale:** it routes memory through OmniRoute, which the operator dropped 2026-10-23. Needs the operator's call before editing.
 - **Prior art in `aesop-xi` never reviewed** — a bridge daemon (`deploy/phone/bridge/aesopd.py`), a supervised `llamad` daemon, `protocol/bridge-protocol.md`, and a `termux-helper` skill already exist there and may cover most of this repo's task.
 
 ## Carried over from unresolved.md (2026-10-08)
